@@ -46,6 +46,16 @@
                 </ul>
               </v-col>
             </v-row>
+            <v-row>
+              <v-col>
+                <span class="font-weight-bold">Height:</span>
+                {{ features.height / 10 }} m
+              </v-col>
+              <v-col>
+                <span class="font-weight-bold">Weight:</span>
+                {{ features.weight / 10 }} kg
+              </v-col>
+            </v-row>
           </v-container>
         </div>
       </v-expand-transition>
