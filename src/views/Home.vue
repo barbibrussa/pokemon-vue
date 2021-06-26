@@ -31,7 +31,6 @@ export default Vue.extend({
   beforeMount() {
     client.get('pokemon?limit=151').then((res: any) => {
       this.list = res.data.results;
-      console.log(this.list);
     });
   },
 });

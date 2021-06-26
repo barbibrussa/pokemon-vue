@@ -1,41 +1,56 @@
 <template>
+  <v-hover v-slot="{ hover }">
     <v-card :max-width="maxWidth">
       <v-img
-        height="200px"
+        height="300px"
         contain
         :src="features.sprites.other['official-artwork'].front_default"
       ></v-img>
-      <v-card-title>
-        <v-row>
-          <v-col class="text-capitalize">
-            {{ pokemon.name }}
-          </v-col>
-          <v-col class="text-right">
-            {{ features.id }}
-          </v-col>
-        </v-row>
-      </v-card-title>
-      <v-card-text>
-        <ul>
-          <li>
-            <span class="font-weight-medium">Type: </span>
-            <v-chip
-              class="text-capitalize"
-              v-for="(item, index) of features.types"
-              :key="index"
-              :color="getColor(item.type.name)"
-            >{{item.type.name}}</v-chip>
-          </li>
-          <li class="text-capitalize">
-            <span class="font-weight-medium">Abilities:</span>
-            {{ features.abilities[0].ability.name }}
-            <span v-if="features.abilities[1] !== undefined">
-            / {{features.abilities[1].ability.name}}
-          </span>
-          </li>
-        </ul>
-      </v-card-text>
+      <v-expand-transition>
+        <div
+          v-if="hover"
+          class="d-flex transition-fast-in-fast-out v-card--reveal white--text"
+          style="height: 100%;"
+          :class="getColor(features.types[0].type.name)"
+        >
+          <v-container>
+            <v-row>
+              <v-col class="text-capitalize text-h4 text-center">
+                {{ pokemon.name }}
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <span class="text-h6">Types:</span>
+                <ul>
+                  <li
+                    class="text-capitalize"
+                    v-for="(item, index) of features.types"
+                    :key="index"
+                  >
+                    {{ item.type.name }}
+                  </li>
+                </ul>
+              </v-col>
+              <v-col>
+                <span class="text-h6">Abilities:</span>
+                <ul>
+                  <li>
+                    {{ features.abilities[0].ability.name }}
+                  </li>
+                  <li
+                    v-if="features.abilities[1] !== undefined"
+                  >
+                    {{features.abilities[1].ability.name}}
+                  </li>
+                </ul>
+              </v-col>
+            </v-row>
+          </v-container>
+        </div>
+      </v-expand-transition>
     </v-card>
+  </v-hover>
 </template>
 
 <script lang="ts">
@@ -49,7 +64,7 @@ const typesColors: Map<string, string> = new Map<string, string>([
   ['water', 'blue darken-1'],
   ['bug', 'light-green darken-2'],
   ['normal', 'blue-grey lighten-3'],
-  ['electric', 'yellow darken-1'],
+  ['electric', 'amber lighten-1'],
   ['ground', 'brown darken-1'],
   ['fairy', 'pink lighten-2'],
   ['fighting', 'orange accent-4'],
@@ -87,8 +102,18 @@ export default Vue.extend({
   beforeMount() {
     client.get(`/pokemon/${this.pokemon.name}`).then((res: any) => {
       this.features = res.data;
-      console.log(this.features);
     });
   },
 });
 </script>
+
+<style>
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: 1;
+  position: absolute;
+  width: 100%;
+}
+</style>
