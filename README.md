@@ -1,4 +1,8 @@
-# pokemon-vue
+# Pokemon UI
+Proyecto de interfaz web sobre Pokemon con Vue y Vuetify.
+
+## UI showcase
+![Showcase gif](https://github.com/barbibrussa/pokemon-vue/blob/main/showcase.gif?raw=true)
 
 ## Project setup
 ```
