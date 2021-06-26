@@ -1,6 +1,9 @@
 <template>
   <v-hover v-slot="{ hover }">
-    <v-card :max-width="maxWidth">
+    <v-card
+      :max-width="maxWidth"
+      elevation="14"
+    >
       <v-img
         height="300px"
         contain
