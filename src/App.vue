@@ -6,11 +6,13 @@
       dark
     >
       <div>
-        <v-app-bar-title>Pokemon UI</v-app-bar-title>
+        <v-img
+          contain
+          height="50"
+          src="./assets/pokemon.svg"
+        ></v-img>
       </div>
-
       <v-spacer></v-spacer>
-
       <v-btn
         href="https://github.com/barbibrussa/pokemon-vue"
         target="_blank"
